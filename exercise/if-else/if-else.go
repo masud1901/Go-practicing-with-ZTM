@@ -33,6 +33,10 @@ const (
 	Guest      = 50
 )
 
+func weekdays(day int) bool {
+	return day <= 4
+}
+
 func accessGranted() {
 	fmt.Println("Granted")
 }
@@ -48,29 +52,15 @@ func access(day, role int) bool {
 
 		return true
 
-	} else if role == Contractor {
-		//* Access weekends: Contractor
-		if day == Saturday {
-			return true
-		} else {
-			return false
-		}
-	} else if role == Member {
+	} else if role == Contractor && !weekdays(day) {
+		return true
+	} else if role == Member && weekdays(day) {
 		//* Access weekdays: Member
-		if day != Saturday {
-			return true
-		} else {
-			return false
-		}
-	} else {
-		//* Access Mondays, Wednesdays, and Fridays: Guest
-		if day%2 == 0 && day != Sunday {
-			return true
-		} else {
-			return false
-		}
-
+		return true
+	} else if role == Guest && (day == Monday || day == Wednesday || day == Friday) {
+		return true
 	}
+	return false
 }
 
 func accessOptimized(day, role int) bool {
