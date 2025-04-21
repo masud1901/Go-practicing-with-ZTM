@@ -18,13 +18,17 @@ import "fmt"
 //  - Print the results to the terminal
 //  - The functions must use the rectangle structure as the function parameter
 
+
 type coordinate struct {
 	x, y int
 }
 type rectangle struct {
 	topleft     coordinate
 	bottomright coordinate
+
 }
+
+
 
 func width(rect rectangle) int {
 	return (rect.bottomright.x - rect.topleft.x)
