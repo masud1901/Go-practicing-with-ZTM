@@ -13,7 +13,7 @@ type Product struct {
 	price int
 }
 
-//* Print to the terminal:
+// * Print to the terminal:
 func printProductInfo(product []Product, length int) {
 	itemCount := len(product)
 
@@ -36,7 +36,6 @@ func main() {
 	//  for 4 products
 	//  - Products must include the price and the name
 	var shoppingList = [4]Product{}
-
 	products := [...]Product{
 		{name: "Rice", price: 45},
 		{name: "Toy", price: 345},
