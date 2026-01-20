@@ -3,8 +3,7 @@
 //  on products.
 //
 //--Requirements:
-//* Create a structure to store items and their security tag state
-//  - Security tags have two states: active (true) and inactive (false)
+
 //* Create functions to activate and deactivate security tags using pointers
 //* Create a checkout() function which can deactivate all tags in a slice
 //* Perform the following:
@@ -18,6 +17,52 @@ package main
 
 import "fmt"
 
+const (
+	Active   = true
+	Inactive = false
+)
+
+//* Create a structure to store items and their security tag state
+//  - Security tags have two states: active (true) and inactive (false)
+
+type SecurityTag bool
+
+type item struct {
+	name string
+	tag  SecurityTag
+}
+
+func activate(tag *SecurityTag) {
+	*tag = Active
+}
+
+func deactivate(tag *SecurityTag) {
+	*tag = Inactive
+}
+
+func checkout(items []item) {
+	fmt.Println("checking out...")
+
+	for i := 0; i < len(items); i++ {
+		deactivate(&items[i].tag)
+	}
+}
+
 func main() {
+
+	shirt := item{"Shirt", Active}
+	pants := item{"Pants", Active}
+	purse := item{"Purse", Active}
+	watch := item{"Watch", Active}
+
+	items := []item{shirt, pants, purse, watch}
+
+	fmt.Println("Initial", items)
+
+	deactivate(&items[0].tag)
+	fmt.Println("Item 0 deactivated", items)
+
+	checkout(items)
+	fmt.Println("checked out", items)
 
 }
